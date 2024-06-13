@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        h2 {
+            color: #007bff;
+        }
+        #update {
+            margin-left: 50px;
+        }
+        #update h2 {
+            margin-bottom: 20px;
+        }
+        #update form {
+            display: flex;
+            flex-direction: column;
+        }
+        #update input[type="file"],
+        #update input[type="text"],
+        #update input[type="number"],
+        #update input[type="submit"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+        #update input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        #update input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="update">
+            <h2>Update Item</h2>
+            <form action="/update/{{item.id}}" method="POST" enctype="multipart/form-data">
+                <input type="text" name="name" id="name" value="{{item.name}}" required>
+                <input type="number" name="current_price" id="current_price" value="{{item.current_price}}" required>
+                <input type="number" name="previous_price" id="previous_price" value="{{item.previous_price}}" required>
+                <input type="number" name="remaining" id="remaining" value="{{item.remaining}}" required>
+                <input type="file" name="image" id="image">
+                <input type="submit" value="Update Item">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

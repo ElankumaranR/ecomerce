@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        
+        .no-customers-msg {
+            margin-left: 50px;
+        }
+        
+        .customer-table {
+            margin-left: 50px;
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .customer-table th,
+        .customer-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        .customer-table th {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .customer-table td {
+            text-align: left;
+        }
+        
+        .remove-customer-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        
+        .remove-customer-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if customers | length < 1 %}
+        <h2 class="no-customers-msg">You have no customers</h2>
+        {% else %}
+        <div id="table" class="customer-table">
+            <h2 style="text-align: left;"><a href="/">logout</a><h2>
+            <h2>Customers</h2>
+            <table cellspacing="0">
+                <tr>
+                    <th>Email</th>
+                    <th>User Name</th>
+                    <th>Date Joined</th>
+                    <th>Action</th>
+                </tr>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.username }}</td>
+                    <td>{{ customer.date_joined.date() }}</td>
+                    <td>
+                        <a href="/removecustomer/{{ customer.id }}" class="remove-customer-btn">Remove Customer</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

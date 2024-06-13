@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        h2 {
+            color: #007bff;
+        }
+        .message {
+            margin-left: 50px;
+        }
+        #table {
+            margin-left: 50px;
+        }
+        #table h2 {
+            margin-bottom: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #dee2e6;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        img {
+            height: 100px;
+            width: 100px;
+        }
+        #form {
+            margin-left: 50px;
+            margin-top: 10px;
+        }
+        #form form {
+            display: flex;
+            flex-direction: column;
+        }
+        #form input[type="file"],
+        #form input[type="text"],
+        #form input[type="number"],
+        #form input[type="submit"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+        #form input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        #form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if items | length < 1 %}
+        <h2 class="message">Add shop items below</h2>
+        {% else %}
+        <div id="table">
+            <h2 style="text-align: left;"><a href="/">logout</a><h2></h2>
+            <h2>Shop items</h2>
+            <a href="/customers" class="btn">Customers</a>
+            <table>
+                <tr>
+                    <th>IMAGE</th>
+                    <th>Name</th>
+                    <th>Current Price</th>
+                    <th>Previous Price</th>
+                    <th>Remaining Stock</th>
+                    <th>Action</th>
+                </tr>
+                {% for item in items %}
+                <tr>
+                    <td><img src="{{ item.image_url }}" alt="Item Image"></td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.current_price }}</td>
+                    <td>{{ item.previous_price }}</td>
+                    <td>{{ item.remaining }}</td>
+                    <td>
+                        <a href="/update/{{ item.id }}" class="btn">Update</a>
+                        <a href="/delete/{{ item.id }}" class="btn">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+        <div id="form">
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="image" id="image" required>
+                <input type="text" name="name" id="name" placeholder="Name of item" required>
+                <input type="number" name="current_price" id="current_price" placeholder="Current price" required>
+                <input type="number" name="previous_price" id="previous_price" placeholder="Previous price" required>
+                <input type="number" name="remaining" id="remaining" placeholder="Remaining stock" required>
+                <input type="submit" value="Add item">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

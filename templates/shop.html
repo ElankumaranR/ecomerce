@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/shop.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Amazon</title>
+    <style>
+    .flash-sales {
+        margin-top: 20px; /* Adjust the margin as needed */
+    }
+    
+    .flash-sales-top {
+        display: flex;
+        align-items: center;
+    }
+    
+    .flash-sales-top i {
+        color: #ff9900; /* Set the color of the bolt icon */
+        margin-right: 10px; /* Adjust the spacing between the bolt icon and text */
+    }
+    
+    .flash-sales-content {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    white-space: nowrap;
+    }
+    .scrollable {
+    overflow-x: scroll;
+}
+    
+    .item {
+        width: 30%; /* Adjust the width of each item */
+        margin-bottom: 20px; /* Adjust the spacing between items */
+        border: 1px solid #ccc; /* Add a border around each item */
+        
+    }
+    
+    .item img {
+        max-width: 100%; /* Ensure images don't exceed the width of their container */
+        height: 80px; /* Maintain aspect ratio */
+    }
+    
+    .text {
+        padding: 3px; /* Add padding to the text content */
+    }
+    
+    .add-cart a {
+        background-color: #ff9900; /* Set the background color of the add to cart button */
+        color: #fff; /* Set the text color of the button */
+        padding: 5px 10px; /* Add padding to the button */
+        text-decoration: none; /* Remove underlines from the button text */
+        border-radius: 5px; /* Add rounded corners to the button */
+    }
+    
+    .items-left {
+        margin-top: 1px; /* Adjust the spacing between the text content and items left section */
+    }
+    
+    .remaining {
+        font-size: 12px;
+        margin-top: 1px; /* Adjust the font size of the remaining items text */
+    }
+    
+    .bar {
+        width: 100%; /* Ensure the progress bar spans the entire width */
+        background-color: #f0f0f0; /* Set the background color of the progress bar */
+        height: 10px; /* Set the height of the progress bar */
+        margin-top: 5px; /* Adjust the spacing between the text content and progress bar */
+    }
+    
+    .line {
+        height: 100%;
+        background-color: #ff9900; /* Set the color of the progress bar indicator */
+        width: 50%; /* Adjust the width of the progress bar indicator */
+    }
+    </style>
+</head>
+<body>
+    <!-- Flash sale section start -->
+    <section class="top" id="flash-sale">
+        <div class="navbar">
+            <div class="name">
+                <div class="logo">
+                    <div class="logo-content">
+                        <i class="fa fa-amazon" aria-hidden="true"></i>
+                        <div class="logo-name"><p>Amazon</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="search">
+                <form action="/search">
+                    <input type="search" class="item" name="item" id="item" placeholder="Search for items brand and categories">
+                    <button class="submit"type="submit">search</button>
+                </form>
+            </div>
+            <div class="content">
+              
+                <div class="cart">
+                    <a href="/cart/">
+                        <p>Cart</p>
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="help">
+                    <a href="/logout">
+                        <p>Log Out</p>
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- First section start -->
+    <section class="first">
+        <div class="first-content">
+            <div class="left">
+                <div class="left-content">
+                    <ul class="left-list">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                                <span class="link-name">Supermarket</span>
+                            </a>
+                        </li>
+                        <!-- Add more list items here -->
+                    </ul>
+                </div>
+            </div>
+            <div class="center">
+                <div class="center-content">
+                    <img src="../static/images/center.gif" alt="">
+                </div>
+            </div>
+            <div class="right">
+                <div class="right1">
+                    <div class="help">
+                        <img src="../static/images/Webp.net-resizeimage-(1).png" alt="">
+                        <div class="description">
+                            <h4>HELP CENTER</h4>
+                            <p>Customer care</p>
+                        </div>
+                    </div>
+                    <!-- Add more help items here -->
+                </div>
+                <div class="right2">
+                    <img src="../static/images/right2.gif" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="first-content2">
+            <div class="button">
+                <img src="../static/images/KE_TW_Quicklink_0322.png" alt="">
+                <h3>Tech Week</h3>
+            </div>
+            <!-- Add more buttons here -->
+        </div>
+        <section class="flash-sales" id="flash-sales">
+            <div class="flash-sales-top">
+                <i class="fa fa-bolt" aria-hidden="true"></i>
+                <p>Flash sales</p>
+                <a href="#" id="see">SEE ALL
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="flash-sales-content">
+                {% for item in items_list %}
+                <div class="item">
+                    <img src="{{ item.image_url }}" alt="Item Image">
+                    <div class="text">
+                        <div class="text-content">
+                            <h4>{{ item.name }}</h4>
+                            <p class="current">RS {{ item.current_price }}</p>
+                            <strike class="previous">RS {{ item.previous_price }}</strike>
+                        </div>
+                        <div class="add-cart">
+                            <a href="/addtocart/{{ item.id }}">Add</a>
+                        </div>
+                    </div>
+                    <div class="items-left">
+                        <div class="remaining"><span id="remaining">{{ item.remaining }}</span> items left</div>
+                        <div class="bar">
+                            <div class="line item{{ loop.index }}"></div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </section>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var link = document.getElementById('see');
+        link.addEventListener('click', function () {
+            var flashSalesContent = document.querySelector('.flash-sales-content');
+            flashSalesContent.classList.add('scrollable');
+        });
+    });
+</script>
+</body>
+</html>
