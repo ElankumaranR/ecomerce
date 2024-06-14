@@ -20,13 +20,39 @@ Flask-MySQLdb
 MySQL
 HTML, CSS (Bootstrap is optional for UI enhancements)
 
-**Installation**
-1.Clone the repository
-2.Navigate into the project directory
-3.Install dependencies using pip
-4.Set up MySQL database
-5.Initialize the database schema
 
-**Usage**
+
+Installation
+Clone the repository:
+git clone <repository-url>
+
+Navigate into the project directory:
+cd <project-directory>
+
+Install dependencies using pip:
+pip install -r requirements.txt
+
+Set up MySQL database:
+Make sure you have MySQL installed and running on your system.
+Create a new database for the project.
+
+Initialize the database schema:
+Open a terminal and navigate to the project directory.
+
+Run the following command to initialize the database schema:
+python initialize_database.py
+
+Configuration
+Before running the application, make sure to configure the database connection in config.py:
+DATABASE_CONFIG = {
+    'host': 'localhost',
+    'user': 'your_mysql_username',
+    'password': 'your_mysql_password',
+    'database': 'your_database_name',
+    'port': 3306  # Change this if your MySQL server is running on a different port
+}
+
+Usage
 Start the Flask application:
 python app.py
+The application will start running on http://localhost:5000.
